@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/spring-aop.xsd">
+
+    <!--扫描Service包-->
+    <context:component-scan base-package="com.cantfu.crud.service" />
+
+    <!--配置事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="pooledDataSource" />
+    </bean>
+    <!--事务采用全注解方式-->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+
+    <!--配置式的事务-->
+    <!--<aop:config>-->
+        <!--&lt;!&ndash;切入点表达式&ndash;&gt;-->
+        <!--<aop:pointcut id="txPoint" expression="execution(* com.cantfu.crud.service..*(..))"/>-->
+        <!--<aop:advisor advice-ref="txAdvice" pointcut-ref="txPoint"/>-->
+    <!--</aop:config>-->
+    <!--&lt;!&ndash;配置事务增强，事务切入&ndash;&gt;-->
+    <!--<tx:advice id="txAdvice">-->
+        <!--<tx:attributes>-->
+            <!--&lt;!&ndash;所有方法都是事务方法&ndash;&gt;-->
+            <!--<tx:method name="*"/>-->
+            <!--&lt;!&ndash;以get开始的方法&ndash;&gt;-->
+            <!--<tx:method name="get*" />-->
+
+        <!--</tx:attributes>-->
+    <!--</tx:advice>-->
+</beans>

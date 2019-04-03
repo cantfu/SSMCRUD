@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!-- 打印查询语句 -->
+        <!--<setting name="logImpl" value="SLF4J" />-->
+
+        <setting name="mapUnderscoreToCamelCase" value="true" />
+    </settings>
+    <typeAliases>
+        <package name="com.cantfu.crud.bean" />
+    </typeAliases>
+    
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!--配置此项使访问大于最大页码或小于最小页码的时候，改变为访问1、max-->
+            <property name="reasonable" value="true" />
+        </plugin>
+    </plugins>
+</configuration>
